@@ -28,6 +28,13 @@ public class PricedBasketItem implements BasketItem{
 		this.price = price;
 	}
 	
+	/**
+	 * Constructor
+	 */
+	public PricedBasketItem(){
+		//
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.mycompany.basket_price.BasketItem#getItemName()

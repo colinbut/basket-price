@@ -5,9 +5,11 @@ package com.mycompany.basket_price;
 
 import static org.junit.Assert.*;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
+
+import com.mycompany.basket_price.goods.Apples;
+import com.mycompany.basket_price.goods.Bread;
+import com.mycompany.basket_price.goods.Milk;
 
 /**
  * @author colin
@@ -15,23 +17,28 @@ import org.junit.Test;
  */
 public class PriceBasketApplicationInputReaderTest {
 
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	/**
-	 * @throws java.lang.Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
-
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testReadInputFromCommandLine() {
+		
+		// Test Data
+		String[] input = {"ShoppingBasket", "Apples", "Milk", "Bread"};
+		
+		// Expectations
+		PriceBasket expectedBasket = new PriceBasket();
+		expectedBasket.putItemInBasket(new Apples());
+		expectedBasket.putItemInBasket(new Milk());
+		expectedBasket.putItemInBasket(new Bread());
+		
+		// Run
+		PriceBasket actualBasket = 
+				PriceBasketApplicationInputReader.readInputFromCommandLine(input);
+		
+		// Verify
+		assertTrue(expectedBasket.getBasketItems().size() == 
+				actualBasket.getBasketItems().size());
+
+		
+		
 	}
 
 }
