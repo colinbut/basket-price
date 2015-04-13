@@ -1,12 +1,12 @@
 /**
  * 
  */
-package com.mycompany.basket_price;
+package com.mycompany.basket_price.model;
 
-import com.mycompany.basket_price.goods.Apples;
-import com.mycompany.basket_price.goods.Bread;
-import com.mycompany.basket_price.goods.Milk;
-import com.mycompany.basket_price.goods.Soup;
+import com.mycompany.basket_price.model.goods.Apples;
+import com.mycompany.basket_price.model.goods.Bread;
+import com.mycompany.basket_price.model.goods.Milk;
+import com.mycompany.basket_price.model.goods.Soup;
 
 /**
  * Using the simple factory pattern

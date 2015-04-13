@@ -1,11 +1,11 @@
 /**
  * 
  */
-package com.mycompany.basket_price.goods;
+package com.mycompany.basket_price.model.goods;
 
 import java.math.BigDecimal;
 
-import com.mycompany.basket_price.PricedBasketItem;
+import com.mycompany.basket_price.model.PricedBasketItem;
 
 /**
  * @author colin

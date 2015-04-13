@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycompany.basket_price;
+package com.mycompany.basket_price.model;
 
 import java.util.HashMap;
 import java.util.Map;

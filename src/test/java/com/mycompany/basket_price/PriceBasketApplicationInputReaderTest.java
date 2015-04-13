@@ -7,9 +7,11 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import com.mycompany.basket_price.goods.Apples;
-import com.mycompany.basket_price.goods.Bread;
-import com.mycompany.basket_price.goods.Milk;
+import com.mycompany.basket_price.model.PriceBasket;
+import com.mycompany.basket_price.model.goods.Apples;
+import com.mycompany.basket_price.model.goods.Bread;
+import com.mycompany.basket_price.model.goods.Milk;
+import com.mycompany.basket_price.util.PriceBasketApplicationInputReader;
 
 /**
  * @author colin

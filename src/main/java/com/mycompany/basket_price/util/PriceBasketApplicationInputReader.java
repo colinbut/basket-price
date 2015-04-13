@@ -1,7 +1,10 @@
 /**
  * 
  */
-package com.mycompany.basket_price;
+package com.mycompany.basket_price.util;
+
+import com.mycompany.basket_price.model.BasketItemStoreFactory;
+import com.mycompany.basket_price.model.PriceBasket;
 
 
 /**

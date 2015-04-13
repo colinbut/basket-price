@@ -9,6 +9,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.mycompany.basket_price.util.PriceBasketApplicationOutputWriter;
+
 /**
  * @author colin
  *
