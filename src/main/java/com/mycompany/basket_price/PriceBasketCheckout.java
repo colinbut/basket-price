@@ -11,4 +11,5 @@ package com.mycompany.basket_price;
  */
 public class PriceBasketCheckout {
 
+	
 }

@@ -30,8 +30,16 @@ public class PriceBasketApplicationOutputReaderTest {
 	}
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testWriteOutput() {
+		
+		String expected = new StringBuilder("Subtotal: £3.10")
+								.append("Apples 10% off: -10p")
+								.append("Total: £3.00").toString();
+		
+		String actual = PriceBasketApplicationOutputWriter.writeOutput();
+		
+		assertEquals(expected, actual);
+		
 	}
 
 }
