@@ -3,6 +3,7 @@
  */
 package com.mycompany.basket_price.util;
 
+import com.mycompany.basket_price.PriceBasketApplicationStore;
 import com.mycompany.basket_price.model.BasketItemStoreFactory;
 import com.mycompany.basket_price.model.PriceBasket;
 
@@ -38,7 +39,10 @@ public class PriceBasketApplicationInputReader {
 		
 		for(int i = 1; i < args.length; i++){
 			basket.putItemInBasket(
-					BasketItemStoreFactory.getBasketItem(args[i]));
+					PriceBasketApplicationStore
+						.getInstance()
+							.getFactory()
+								.getBasketItem(args[i]));
 		}
 		
 		return basket;

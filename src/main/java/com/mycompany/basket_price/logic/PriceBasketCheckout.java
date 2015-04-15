@@ -3,10 +3,19 @@
  */
 package com.mycompany.basket_price.logic;
 
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import com.mycompany.basket_price.PriceBasketApplicationStore;
 import com.mycompany.basket_price.model.BasketItem;
+import com.mycompany.basket_price.model.BasketItemStoreFactory;
 import com.mycompany.basket_price.model.PriceBasket;
+import com.mycompany.basket_price.model.Receipt;
+import com.mycompany.basket_price.model.SpecialOffer;
+import com.mycompany.basket_price.model.SpecialOfferBuy2Get1HalfPrice;
+import com.mycompany.basket_price.model.SpecialOfferDiscount;
 
 /**
  * 
@@ -29,8 +38,75 @@ public class PriceBasketCheckout {
 		basketOfItems = basket;
 	}
 	
-	public void checkout(){
-		calculateSubTotal();
+	public Receipt checkout(){
+		
+		Receipt receipt = new Receipt();
+		
+		receipt.setSubtotal(new BigDecimal(calculateSubTotal()));
+		
+		// get special offers & apply them to items bought
+		
+		List<SpecialOffer> specialOffersInStore = PriceBasketApplicationStore.getInstance()
+													.getStoreSpecialOffers();
+		
+		
+		//TODO: rewrite this later
+		Map<SpecialOffer, BigDecimal> specialOffersApplied = new HashMap<SpecialOffer, BigDecimal>();
+		
+		for(BasketItem item : basketOfItems.getBasketItems().keySet()){
+			
+			for(int i = 0; i < specialOffersInStore.size(); i++){
+				if(specialOffersInStore.get(i)
+					.getItemOnSpecialOffer()
+					.getClass()
+					.isInstance(item)){
+					
+					//TODO: re-code this using handlers maybe
+					
+					if(specialOffersInStore.get(i) instanceof SpecialOfferDiscount){
+						
+						SpecialOfferDiscount sod = (SpecialOfferDiscount)specialOffersInStore.get(i);
+						
+						double discount = sod.getDiscount();
+						double moneyOff = item.getPrice().doubleValue() * (discount / 100);
+						
+						specialOffersApplied.put(sod, new BigDecimal(moneyOff));
+						
+					}
+					else if(specialOffersInStore.get(i) instanceof SpecialOfferBuy2Get1HalfPrice){
+						
+						SpecialOfferBuy2Get1HalfPrice sob2g1hp = (SpecialOfferBuy2Get1HalfPrice)specialOffersInStore.get(i);
+						
+						int quantity = basketOfItems.getBasketItems().get(item);
+						if(quantity == 2){
+							if(basketOfItems.getBasketItems().containsKey(
+									sob2g1hp.getHalfPriceItem())){
+								
+								double moneyToTakeOff = item.getPrice().doubleValue() / 2;
+								specialOffersApplied.put(sob2g1hp, new BigDecimal(moneyToTakeOff));
+								
+							}	
+							else{
+								// no special offer applied too as has not bought the 
+								// item being offered half price
+							}
+						}
+						else{
+							// no special offer applied as has not bought enough of the 
+							// specialed offered item
+						}
+						
+					}
+				}
+			}
+			
+		}
+		receipt.setSpecialOffersApplied(specialOffersApplied);
+		
+		
+		receipt.setTotal(new BigDecimal(calculateTotal()));
+		
+		return receipt;
 	}
 	
 	private double calculateSubTotal(){
@@ -48,5 +124,10 @@ public class PriceBasketCheckout {
 		
 		return total;
 		
+	}
+	
+	private double calculateTotal(){
+		throw new RuntimeException("Not yet implemented");
+		//return 0.0;
 	}
 }

@@ -4,6 +4,7 @@
 package com.mycompany.basket_price.service;
 
 import com.mycompany.basket_price.logic.PriceBasketCheckout;
+import com.mycompany.basket_price.model.Receipt;
 import com.mycompany.basket_price.util.PriceBasketApplicationOutputWriter;
 
 /**
@@ -33,9 +34,8 @@ public class PriceBasketServiceImpl implements PriceBasketService{
 	@Override
 	public String getPriceOfBasketItems() {
 		
-		checkoutTill.checkout(); //this needs to return something to pass down below
-		// a receipt?
-		return PriceBasketApplicationOutputWriter.writeOutput();
+		Receipt receipt = checkoutTill.checkout(); 
+		return PriceBasketApplicationOutputWriter.writeOutput(receipt);
 	}
 
 }

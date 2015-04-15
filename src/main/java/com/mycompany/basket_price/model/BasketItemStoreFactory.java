@@ -31,7 +31,7 @@ public class BasketItemStoreFactory {
 	 * @param itemName
 	 * @return
 	 */
-	public static BasketItem getBasketItem(String itemName){
+	public BasketItem getBasketItem(String itemName){
 		
 		BasketItem item;
 		
