@@ -1,14 +1,9 @@
 /**
  * 
  */
-package com.mycompany.basket_price;
+package com.mycompany.basket_price.model;
 
 import java.util.List;
-
-import com.mycompany.basket_price.model.BasketItemStoreFactory;
-import com.mycompany.basket_price.model.SpecialOffer;
-import com.mycompany.basket_price.model.SpecialOfferBuy2Get1HalfPrice;
-import com.mycompany.basket_price.model.SpecialOfferDiscount;
 
 /**
  * This is a Singleton

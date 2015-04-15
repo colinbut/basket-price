@@ -3,9 +3,8 @@
  */
 package com.mycompany.basket_price.util;
 
-import com.mycompany.basket_price.PriceBasketApplicationStore;
-import com.mycompany.basket_price.model.BasketItemStoreFactory;
 import com.mycompany.basket_price.model.PriceBasket;
+import com.mycompany.basket_price.model.PriceBasketApplicationStore;
 
 
 /**
