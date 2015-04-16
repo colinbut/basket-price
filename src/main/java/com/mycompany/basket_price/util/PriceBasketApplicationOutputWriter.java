@@ -23,11 +23,6 @@ public class PriceBasketApplicationOutputWriter {
 		
 		DecimalFormat decimalFormattedText = new DecimalFormat("##.00");
 		
-//		BigDecimal subtotal = new BigDecimal(3.10);
-//		BigDecimal specialOffer = new BigDecimal(0.10);
-//		BigDecimal total = new BigDecimal(3.00);
-//		String item = "Apples";
-//		int discount = 10; //in %
 		
 		BigDecimal subtotal = receipt.getSubtotal();
 		BigDecimal total = receipt.getTotal();
@@ -43,15 +38,23 @@ public class PriceBasketApplicationOutputWriter {
 				
 				if(entry.getKey() instanceof SpecialOfferDiscount){
 					SpecialOfferDiscount sod = (SpecialOfferDiscount)entry.getKey();
-					specialOfferSb.append(sod.getItemOnSpecialOffer()+"\n");
-					specialOfferSb.append(" " + sod.getDiscount() + "% off:");
+					specialOfferSb.append(sod.getItemOnSpecialOffer().getItemName());
+					specialOfferSb.append(" " + sod.getDiscount() + "% off: ");
 					specialOfferSb.append("-" + ((entry.getValue().doubleValue() > 1.00) 
 												? "£"+entry.getValue().doubleValue()
 												: entry.getValue().doubleValue()+"p"));
 					specialOfferSb.append("\n");
 				}
 				else if(entry.getKey() instanceof SpecialOfferBuy2Get1HalfPrice){
-					//TODO: to implement
+					
+					SpecialOfferBuy2Get1HalfPrice sob2g1hp = (SpecialOfferBuy2Get1HalfPrice) entry.getKey();
+					
+					specialOfferSb.append("Buy 2 " + sob2g1hp.getItemOnSpecialOffer().getItemName());
+					specialOfferSb.append(" get " + sob2g1hp.getHalfPriceItem()+ " half price: ");
+					specialOfferSb.append("-" + ((entry.getValue().doubleValue() > 1.00) 
+							? "£"+entry.getValue().doubleValue()
+							: entry.getValue().doubleValue()+"p"));
+					specialOfferSb.append("\n");
 				}
 				
 			}

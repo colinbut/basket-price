@@ -32,8 +32,17 @@ public class PriceBasket {
 	 * 
 	 * @param item to put in basket
 	 */
-	public void putItemInBasket(BasketItem item){
-		basketItems.put(item, 1); //default 1 qty
+	public void putItemInBasket(BasketItem newItem){
+		
+		for(BasketItem item : basketItems.keySet()){
+			if(item.getItemName().equals(newItem.getItemName())){
+				basketItems.put(item, basketItems.get(item).intValue()+1);
+				return;
+			}
+		}
+		
+		basketItems.put(newItem, 1); 
+		
 	}
 	
 	/**

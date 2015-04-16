@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.mycompany.basket_price.model.BasketItem;
-import com.mycompany.basket_price.model.BasketItemStoreFactory;
 import com.mycompany.basket_price.model.PriceBasket;
 import com.mycompany.basket_price.model.PriceBasketApplicationStore;
 import com.mycompany.basket_price.model.Receipt;
@@ -25,9 +24,10 @@ import com.mycompany.basket_price.model.SpecialOfferDiscount;
  */
 public class PriceBasketCheckout {
 
-	//TODO: this class hold info about any special offers
-	
 	private PriceBasket basketOfItems;
+	
+	private double subtotal;
+	private double total;
 	
 	/**
 	 * Constructor
@@ -78,7 +78,8 @@ public class PriceBasketCheckout {
 						SpecialOfferBuy2Get1HalfPrice sob2g1hp = (SpecialOfferBuy2Get1HalfPrice)specialOffersInStore.get(i);
 						
 						int quantity = basketOfItems.getBasketItems().get(item);
-						if(quantity == 2){
+						if(quantity >= 2){
+							// TODO: rewrite this to compare on item name rather than object
 							if(basketOfItems.getBasketItems().containsKey(
 									sob2g1hp.getHalfPriceItem())){
 								
@@ -104,7 +105,7 @@ public class PriceBasketCheckout {
 		receipt.setSpecialOffersApplied(specialOffersApplied);
 		
 		
-		receipt.setTotal(new BigDecimal(calculateTotal()));
+		receipt.setTotal(new BigDecimal(calculateTotal(specialOffersApplied)));
 		
 		return receipt;
 	}
@@ -114,20 +115,29 @@ public class PriceBasketCheckout {
 		
 		Map<BasketItem, Integer> items = basketOfItems.getBasketItems();
 		
-		double total = 0.0;
+		subtotal = 0.0;
 		
 		for(Map.Entry<BasketItem, Integer> item : items.entrySet()){
 			
-			total += item.getKey().getPrice().doubleValue() * item.getValue().intValue();
+			subtotal += item.getKey().getPrice().doubleValue() * item.getValue().intValue();
 			
 		}
 		
-		return total;
+		return subtotal;
 		
 	}
 	
-	private double calculateTotal(){
-		throw new RuntimeException("Not yet implemented");
-		//return 0.0;
+	private double calculateTotal(Map<SpecialOffer, BigDecimal> specialOffersApplied){
+		
+		double totalMoneyOff = 0.0;
+		
+		for(Map.Entry<SpecialOffer, BigDecimal> entry : specialOffersApplied.entrySet()){
+			totalMoneyOff += entry.getValue().doubleValue();
+		}
+		
+		total = subtotal - totalMoneyOff;
+		
+		return total;
+		
 	}
 }

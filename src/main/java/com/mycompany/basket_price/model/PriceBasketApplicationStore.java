@@ -3,6 +3,7 @@
  */
 package com.mycompany.basket_price.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +23,7 @@ public class PriceBasketApplicationStore {
 	
 	private PriceBasketApplicationStore(){
 		// Singleton Design Pattern implementation
+		specialOffersInStore = new ArrayList<>();
 		storeFactory = new BasketItemStoreFactory();
 		configureSpecialOffersInStoreIntoSystem();
 	}
