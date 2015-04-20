@@ -47,7 +47,7 @@ public class PriceBasketApplicationOutputWriter {
 					SpecialOfferBuy2Get1HalfPrice sob2g1hp = (SpecialOfferBuy2Get1HalfPrice) entry.getKey();
 					
 					specialOfferSb.append("Buy 2 " + sob2g1hp.getItemOnSpecialOffer().getItemName());
-					specialOfferSb.append(" get " + sob2g1hp.getHalfPriceItem()+ " half price: ");
+					specialOfferSb.append(" get " + sob2g1hp.getHalfPriceItem().getItemName()+ " half price: ");
 					specialOfferSb.append("-" + ((entry.getValue().doubleValue() > 1.00) 
 							? "£"+entry.getValue().setScale(2, RoundingMode.HALF_EVEN)
 							: entry.getValue().setScale(2, RoundingMode.HALF_EVEN)+"p"));

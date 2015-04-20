@@ -53,4 +53,22 @@ public class PriceBasket {
 	public Map<BasketItem, Integer> getBasketItems(){
 		return basketItems;
 	}
+	
+	/**
+	 * Checks whether the basket contains a particular item
+	 * 
+	 * @param item
+	 * @return
+	 */
+	public boolean basketContainItem(BasketItem item){
+		
+		for(BasketItem basketItem : basketItems.keySet()){
+			if(basketItem.getItemName().equals(item.getItemName())){
+				return true;
+			}
+		}
+		
+		return false;
+		
+	}
 }

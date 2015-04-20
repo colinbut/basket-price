@@ -79,11 +79,10 @@ public class PriceBasketCheckout {
 						
 						int quantity = basketOfItems.getBasketItems().get(item);
 						if(quantity >= 2){
-							// TODO: rewrite this to compare on item name rather than object
-							if(basketOfItems.getBasketItems().containsKey(
-									sob2g1hp.getHalfPriceItem())){
+							
+							if(basketOfItems.basketContainItem(sob2g1hp.getHalfPriceItem())){
 								
-								double moneyToTakeOff = item.getPrice().doubleValue() / 2;
+								double moneyToTakeOff = sob2g1hp.getHalfPriceItem().getPrice().doubleValue() / 2;
 								specialOffersApplied.put(sob2g1hp, new BigDecimal(moneyToTakeOff));
 								
 							}	
