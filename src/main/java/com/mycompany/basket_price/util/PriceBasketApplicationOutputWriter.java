@@ -4,7 +4,7 @@
 package com.mycompany.basket_price.util;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
+import java.math.RoundingMode;
 import java.util.Map;
 
 import com.mycompany.basket_price.model.Receipt;
@@ -21,11 +21,8 @@ public class PriceBasketApplicationOutputWriter {
 
 	public static String writeOutput(Receipt receipt){
 		
-		DecimalFormat decimalFormattedText = new DecimalFormat("##.00");
-		
-		
-		BigDecimal subtotal = receipt.getSubtotal();
-		BigDecimal total = receipt.getTotal();
+		BigDecimal subtotal = receipt.getSubtotal().setScale(2, RoundingMode.HALF_EVEN);
+		BigDecimal total = receipt.getTotal().setScale(2, RoundingMode.HALF_EVEN);
 		
 		StringBuilder specialOfferSb = new StringBuilder();
 		if(receipt.getSpecialOffersApplied().size() == 0){
@@ -41,8 +38,8 @@ public class PriceBasketApplicationOutputWriter {
 					specialOfferSb.append(sod.getItemOnSpecialOffer().getItemName());
 					specialOfferSb.append(" " + sod.getDiscount() + "% off: ");
 					specialOfferSb.append("-" + ((entry.getValue().doubleValue() > 1.00) 
-												? "£"+entry.getValue().doubleValue()
-												: entry.getValue().doubleValue()+"p"));
+												? "£"+entry.getValue().setScale(2, RoundingMode.HALF_EVEN)
+												: entry.getValue().setScale(2, RoundingMode.HALF_EVEN)+"p"));
 					specialOfferSb.append("\n");
 				}
 				else if(entry.getKey() instanceof SpecialOfferBuy2Get1HalfPrice){
@@ -52,8 +49,8 @@ public class PriceBasketApplicationOutputWriter {
 					specialOfferSb.append("Buy 2 " + sob2g1hp.getItemOnSpecialOffer().getItemName());
 					specialOfferSb.append(" get " + sob2g1hp.getHalfPriceItem()+ " half price: ");
 					specialOfferSb.append("-" + ((entry.getValue().doubleValue() > 1.00) 
-							? "£"+entry.getValue().doubleValue()
-							: entry.getValue().doubleValue()+"p"));
+							? "£"+entry.getValue().setScale(2, RoundingMode.HALF_EVEN)
+							: entry.getValue().setScale(2, RoundingMode.HALF_EVEN)+"p"));
 					specialOfferSb.append("\n");
 				}
 				

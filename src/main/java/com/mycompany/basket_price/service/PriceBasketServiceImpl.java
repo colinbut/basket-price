@@ -15,8 +15,11 @@ public class PriceBasketServiceImpl implements PriceBasketService{
 
 	private PriceBasketCheckout checkoutTill;
 	
+	/**
+	 * Constructor
+	 */
 	public PriceBasketServiceImpl() {
-		// TODO Auto-generated constructor stub
+		// 
 	}
 	
 	/**
