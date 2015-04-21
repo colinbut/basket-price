@@ -22,121 +22,144 @@ import com.mycompany.basket_price.model.SpecialOfferDiscount;
  * @author colin
  *
  */
-public class PriceBasketCheckout {
+public class PriceBasketCheckout extends Checkout{
 
 	private PriceBasket basketOfItems;
+
+	private Receipt receipt;
 	
-	private double subtotal;
-	private double total;
-	
+
 	/**
 	 * Constructor
 	 * 
 	 * @param basket
 	 */
-	public PriceBasketCheckout(PriceBasket basket){
+	public PriceBasketCheckout(PriceBasket basket) {
 		basketOfItems = basket;
+		receipt = new Receipt();
 	}
+
 	
-	public Receipt checkout(){
-		
-		Receipt receipt = new Receipt();
-		
-		receipt.setSubtotal(new BigDecimal(calculateSubTotal()));
-		
+	/*
+	 * (non-Javadoc)
+	 * @see com.mycompany.basket_price.logic.Checkout#calculateSubTotal()
+	 */
+	@Override
+	public void calculateSubTotal() {
+
+		Map<BasketItem, Integer> items = basketOfItems.getBasketItems();
+
+		double subtotal = 0.0;
+
+		for (Map.Entry<BasketItem, Integer> item : items.entrySet()) {
+
+			subtotal += item.getKey().getPrice().doubleValue()
+					* item.getValue().intValue();
+
+		}
+
+		receipt.setSubtotal(new BigDecimal(subtotal));
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.mycompany.basket_price.logic.Checkout#applySpecialOffers()
+	 */
+	@Override
+	public void applySpecialOffers() {
 		// get special offers & apply them to items bought
-		
-		List<SpecialOffer> specialOffersInStore = PriceBasketApplicationStore.getInstance()
-													.getStoreSpecialOffers();
-		
-		
-		//TODO: rewrite this later
+
+		List<SpecialOffer> specialOffersInStore = PriceBasketApplicationStore
+				.getInstance().getStoreSpecialOffers();
+
+		// TODO: rewrite this later
 		Map<SpecialOffer, BigDecimal> specialOffersApplied = new HashMap<SpecialOffer, BigDecimal>();
-		
-		for(BasketItem item : basketOfItems.getBasketItems().keySet()){
-			
-			for(int i = 0; i < specialOffersInStore.size(); i++){
-				if(specialOffersInStore.get(i)
-					.getItemOnSpecialOffer()
-					.getClass()
-					.isInstance(item)){
-					
-					//TODO: re-code this using handlers maybe
-					
-					if(specialOffersInStore.get(i) instanceof SpecialOfferDiscount){
-						
-						SpecialOfferDiscount sod = (SpecialOfferDiscount)specialOffersInStore.get(i);
-						
+
+		for (BasketItem item : basketOfItems.getBasketItems().keySet()) {
+
+			for (int i = 0; i < specialOffersInStore.size(); i++) {
+				if (specialOffersInStore.get(i).getItemOnSpecialOffer()
+						.getClass().isInstance(item)) {
+
+					// TODO: re-code this using handlers maybe
+
+					if (specialOffersInStore.get(i) instanceof SpecialOfferDiscount) {
+
+						SpecialOfferDiscount sod = (SpecialOfferDiscount) specialOffersInStore
+								.get(i);
+
 						double discount = sod.getDiscount();
-						double moneyOff = item.getPrice().doubleValue() * (discount / 100);
-						
+						double moneyOff = item.getPrice().doubleValue()
+								* (discount / 100);
+
 						specialOffersApplied.put(sod, new BigDecimal(moneyOff));
-						
-					}
-					else if(specialOffersInStore.get(i) instanceof SpecialOfferBuy2Get1HalfPrice){
-						
-						SpecialOfferBuy2Get1HalfPrice sob2g1hp = (SpecialOfferBuy2Get1HalfPrice)specialOffersInStore.get(i);
-						
+
+					} else if (specialOffersInStore.get(i) instanceof SpecialOfferBuy2Get1HalfPrice) {
+
+						SpecialOfferBuy2Get1HalfPrice sob2g1hp = (SpecialOfferBuy2Get1HalfPrice) specialOffersInStore
+								.get(i);
+
 						int quantity = basketOfItems.getBasketItems().get(item);
-						if(quantity >= 2){
-							
-							if(basketOfItems.basketContainItem(sob2g1hp.getHalfPriceItem())){
-								
-								double moneyToTakeOff = sob2g1hp.getHalfPriceItem().getPrice().doubleValue() / 2;
-								specialOffersApplied.put(sob2g1hp, new BigDecimal(moneyToTakeOff));
-								
-							}	
-							else{
-								// no special offer applied too as has not bought the 
+						if (quantity >= 2) {
+
+							if (basketOfItems.basketContainItem(sob2g1hp
+									.getHalfPriceItem())) {
+
+								double moneyToTakeOff = sob2g1hp
+										.getHalfPriceItem().getPrice()
+										.doubleValue() / 2;
+								specialOffersApplied.put(sob2g1hp,
+										new BigDecimal(moneyToTakeOff));
+
+							} else {
+								// no special offer applied too as has not
+								// bought the
 								// item being offered half price
 							}
-						}
-						else{
-							// no special offer applied as has not bought enough of the 
+						} else {
+							// no special offer applied as has not bought enough
+							// of the
 							// specialed offered item
 						}
-						
+
 					}
 				}
 			}
-			
+
 		}
+		
+		
 		receipt.setSpecialOffersApplied(specialOffersApplied);
-		
-		
-		receipt.setTotal(new BigDecimal(calculateTotal(specialOffersApplied)));
-		
-		return receipt;
 	}
-	
-	private double calculateSubTotal(){
-		
-		
-		Map<BasketItem, Integer> items = basketOfItems.getBasketItems();
-		
-		subtotal = 0.0;
-		
-		for(Map.Entry<BasketItem, Integer> item : items.entrySet()){
-			
-			subtotal += item.getKey().getPrice().doubleValue() * item.getValue().intValue();
-			
-		}
-		
-		return subtotal;
-		
-	}
-	
-	private double calculateTotal(Map<SpecialOffer, BigDecimal> specialOffersApplied){
-		
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.mycompany.basket_price.logic.Checkout#calculateTotal()
+	 */
+	@Override
+	public void calculateTotal() {
+
 		double totalMoneyOff = 0.0;
-		
-		for(Map.Entry<SpecialOffer, BigDecimal> entry : specialOffersApplied.entrySet()){
+
+		for (Map.Entry<SpecialOffer, BigDecimal> entry : receipt.getSpecialOffersApplied()
+				.entrySet()) {
 			totalMoneyOff += entry.getValue().doubleValue();
 		}
-		
-		total = subtotal - totalMoneyOff;
-		
-		return total;
-		
+
+		receipt.setTotal(new BigDecimal(receipt.getSubtotal().doubleValue()
+				- totalMoneyOff));
+
+	}
+
+
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.mycompany.basket_price.logic.Checkout#getReceipt()
+	 */
+	@Override
+	public Receipt getReceipt() {
+		return receipt;
 	}
 }
