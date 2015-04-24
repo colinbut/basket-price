@@ -17,13 +17,7 @@ import com.mycompany.basket_price.util.PriceBasketApplicationInputReader;
  */
 public class PriceBasketApplication {
 
-	/**
-	 * Main
-	 * 
-	 * @param args
-	 */
-	public static void main(String[] args){
-		
+	public String process(String[] args){
 		PriceBasketService priceBasketService = new PriceBasketServiceImpl();
 		
 		PriceBasket basket = PriceBasketApplicationInputReader.readInputFromCommandLine(args);
@@ -34,7 +28,18 @@ public class PriceBasketApplication {
 		// using Setter DI
 		((PriceBasketServiceImpl)priceBasketService).setPriceBasketCheckout(checkout);
 		
-		System.out.println(priceBasketService.getPriceOfBasketItems());
+		return priceBasketService.getPriceOfBasketItems();
+	}
+	
+	/**
+	 * Main
+	 * 
+	 * @param args
+	 */
+	public static void main(String[] args){
+		
+		PriceBasketApplication app = new PriceBasketApplication();
+		System.out.println(app.process(args));
 		
 	}
 }
