@@ -4,6 +4,9 @@
 package com.mycompany.basket_price.service;
 
 /**
+ * PriceBasketService - a service providing ability to get a list of 
+ * the priced basket items
+ * 
  * @author colin
  *
  */

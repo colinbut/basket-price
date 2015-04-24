@@ -4,6 +4,9 @@
 package com.mycompany.basket_price.model;
 
 /**
+ * An implementation of the SpecialOffer interface to represent a particular 
+ * deal of "Buy 2 get 1 half price"
+ * 
  * @author colin
  *
  */
@@ -24,24 +27,33 @@ public class SpecialOfferBuy2Get1HalfPrice implements SpecialOffer{
 		this.buy2Item = buy2Item;
 		this.halfPriceItem = halfPriceItem;
 	}
+	
 	/**
+	 * Gets the item that is required to be brought in 2 in order
+	 * to qualify for a special offer 
+	 * 
 	 * @return the buy2Item
 	 */
 	public BasketItem getBuy2Item() {
 		return buy2Item;
 	}
+	
 	/**
 	 * @param buy2Item the buy2Item to set
 	 */
 	public void setBuy2Item(BasketItem buy2Item) {
 		this.buy2Item = buy2Item;
 	}
+	
 	/**
+	 * Gets the item that is on offered to be half price
+	 * 
 	 * @return the halfPriceItem
 	 */
 	public BasketItem getHalfPriceItem() {
 		return halfPriceItem;
 	}
+	
 	/**
 	 * @param halfPriceItem the halfPriceItem to set
 	 */

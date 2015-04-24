@@ -24,8 +24,6 @@ public class BasketItemStoreFactory {
 	/**
 	 * Simple Factory Pattern
 	 * 
-	 * 
-	 * 
 	 * TODO: need to enhance/fix later
 	 * 
 	 * @param itemName

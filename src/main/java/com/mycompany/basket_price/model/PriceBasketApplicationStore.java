@@ -21,6 +21,9 @@ public class PriceBasketApplicationStore {
 	private BasketItemStoreFactory storeFactory;
 	private List<SpecialOffer> specialOffersInStore; //this week
 	
+	/*
+	 * Constructor
+	 */
 	private PriceBasketApplicationStore(){
 		// Singleton Design Pattern implementation
 		specialOffersInStore = new ArrayList<>();
@@ -28,6 +31,13 @@ public class PriceBasketApplicationStore {
 		configureSpecialOffersInStoreIntoSystem();
 	}
 	
+	/*
+	 * Sets up the special offers for this week
+	 * 
+	 * atm - this is hardcoded - need to modify this into a more flexible
+	 * runtime solution
+	 * 
+	 */
 	private void configureSpecialOffersInStoreIntoSystem(){
 		
 		//TODO: use a better way to associate items with SpecialOffers
@@ -42,8 +52,12 @@ public class PriceBasketApplicationStore {
 	}
 	
 	/**
+	 * Returns an instance of PriceBasketApplicationStore
 	 * 
-	 * @return
+	 * The idea is that there can only be only ONE store for this 
+	 * 'Application'
+	 * 
+	 * @return instance of this
 	 */
 	public static PriceBasketApplicationStore getInstance(){
 		if(INSTANCE == null){
@@ -52,10 +66,20 @@ public class PriceBasketApplicationStore {
 		return INSTANCE;
 	}
 	
+	/**
+	 * Gets the factory object used to create the items
+	 * 
+	 * @return store factory
+	 */
 	public BasketItemStoreFactory getFactory(){
 		return storeFactory;
 	}
 	
+	/**
+	 * Gets a list of the special offers that is on offer
+	 * 
+	 * @return list of special offers
+	 */
 	public List<SpecialOffer> getStoreSpecialOffers(){
 		return specialOffersInStore;
 	}

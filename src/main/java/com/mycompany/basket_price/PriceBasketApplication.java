@@ -11,6 +11,8 @@ import com.mycompany.basket_price.util.PriceBasketApplicationInputReader;
 import com.mycompany.basket_price.util.PriceBasketApplicationOutputWriterConsole;
 
 /**
+ * The Price Basket Application
+ * 
  * @author colin
  *
  */

@@ -4,6 +4,12 @@
 package com.mycompany.basket_price.model;
 
 /**
+ * An implementation of the SpecialOffer interface where it represents a 
+ * deal of a "discount"ed offer
+ * 
+ * The discount is a % of the original price which is then taken off.
+ * For e.g. 10% off!
+ * 
  * @author colin
  *
  */
@@ -25,23 +31,30 @@ public class SpecialOfferDiscount implements SpecialOffer {
 	
 	
 	/**
+	 * Gets the amount discounted in percentage
+	 * 
 	 * @return the discount
 	 */
 	public double getDiscount() {
 		return discount;
 	}
+	
 	/**
 	 * @param discount the discount to set
 	 */
 	public void setDiscount(double discount) {
 		this.discount = discount;
 	}
+	
 	/**
+	 * Gets the item
+	 * 
 	 * @return the item
 	 */
 	public BasketItem getItem() {
 		return item;
 	}
+	
 	/**
 	 * @param item the item to set
 	 */

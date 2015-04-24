@@ -4,6 +4,8 @@
 package com.mycompany.basket_price.model;
 
 /**
+ * An interface for representing the Special Offer
+ * 
  * @author colin
  *
  */
@@ -15,7 +17,7 @@ public interface SpecialOffer {
 	/**
 	 * Gets the special offer item
 	 * 
-	 * @return
+	 * @return an item that is part of a special offering
 	 */
 	BasketItem getItemOnSpecialOffer();
 }

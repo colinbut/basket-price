@@ -8,6 +8,8 @@ import com.mycompany.basket_price.model.Receipt;
 import com.mycompany.basket_price.util.PriceBasketApplicationOutputWriter;
 
 /**
+ * Implementation of the PriceBasketService interface
+ * 
  * @author colin
  *
  */
@@ -23,8 +25,9 @@ public class PriceBasketServiceImpl implements PriceBasketService{
 	}
 	
 	/**
+	 * Sets the PriceBasketCheckout
 	 * 
-	 * @param checkout
+	 * @param checkout the checkout object to set
 	 */
 	public void setPriceBasketCheckout(PriceBasketCheckout checkout){
 		checkoutTill = checkout;
@@ -36,7 +39,6 @@ public class PriceBasketServiceImpl implements PriceBasketService{
 	 */
 	@Override
 	public String getPriceOfBasketItems() {
-		
 		Receipt receipt = checkoutTill.checkout().getReceipt(); 
 		return PriceBasketApplicationOutputWriter.writeOutput(receipt);
 	}

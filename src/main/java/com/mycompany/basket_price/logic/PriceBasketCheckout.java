@@ -17,7 +17,7 @@ import com.mycompany.basket_price.model.SpecialOfferBuy2Get1HalfPrice;
 import com.mycompany.basket_price.model.SpecialOfferDiscount;
 
 /**
- * 
+ * An implementation of Checkout abstract class
  * 
  * @author colin
  *
@@ -26,6 +26,7 @@ public class PriceBasketCheckout extends Checkout{
 
 	private PriceBasket basketOfItems;
 
+	// TODO: decouple receipt away from this
 	private Receipt receipt;
 	
 
