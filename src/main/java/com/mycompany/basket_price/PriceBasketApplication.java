@@ -8,7 +8,6 @@ import com.mycompany.basket_price.model.PriceBasket;
 import com.mycompany.basket_price.service.PriceBasketService;
 import com.mycompany.basket_price.service.PriceBasketServiceImpl;
 import com.mycompany.basket_price.util.PriceBasketApplicationInputReader;
-import com.mycompany.basket_price.util.PriceBasketApplicationOutputWriterConsole;
 
 /**
  * The Price Basket Application
@@ -35,8 +34,7 @@ public class PriceBasketApplication {
 		// using Setter DI
 		((PriceBasketServiceImpl)priceBasketService).setPriceBasketCheckout(checkout);
 		
-		PriceBasketApplicationOutputWriterConsole.writeOutputToConsole(
-				priceBasketService.getPriceOfBasketItems());
+		System.out.println(priceBasketService.getPriceOfBasketItems());
 		
 	}
 }

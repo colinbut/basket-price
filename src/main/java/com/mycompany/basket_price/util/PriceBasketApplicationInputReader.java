@@ -10,11 +10,15 @@ import com.mycompany.basket_price.model.PriceBasketApplicationStore;
 /**
  * A class that is responsible for capturing user entered input
  * 
+ * This is aimed to be a utility class
+ * 
  * @author colin
  *
  */
 public class PriceBasketApplicationInputReader {
 
+	private PriceBasketApplicationInputReader(){}
+	
 	/**
 	 * Reads data from command line (args) and put into a PriceBasket object 
 	 * which contains a mappings of goods and their quantity
