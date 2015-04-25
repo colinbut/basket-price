@@ -4,16 +4,16 @@ A small application/program that prices a basket of goods taking into account so
 offers.
 
 The program accepts a list of items from the command line in the form:
-<Application Name> <Item> <Item> <Item> etc...
+Application Name Item Item Item etc...
 
 
 
 ###### Technologies
-Java 8
-Maven
-Git
-Travis-CI
-JUnit 4.11
+* Java 8
+* Maven
+* Git
+* Travis-CI
+* JUnit 4.11
 
 ###### Technical Design
 - Adopts SOA
