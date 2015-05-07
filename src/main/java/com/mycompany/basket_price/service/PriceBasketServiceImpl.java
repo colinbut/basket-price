@@ -39,7 +39,7 @@ public class PriceBasketServiceImpl implements PriceBasketService{
 	 */
 	@Override
 	public String getPriceOfBasketItems() {
-		Receipt receipt = checkoutTill.checkout().getReceipt(); 
+		Receipt receipt = checkoutTill.checkout().generateReceipt(); 
 		return PriceBasketApplicationOutputWriter.writeOutput(receipt);
 	}
 

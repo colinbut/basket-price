@@ -4,6 +4,7 @@
 package com.mycompany.basket_price.logic;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +12,12 @@ import java.util.Map;
 import com.mycompany.basket_price.model.BasketItem;
 import com.mycompany.basket_price.model.PriceBasket;
 import com.mycompany.basket_price.model.PriceBasketApplicationStore;
+import com.mycompany.basket_price.model.PricedBasketItem;
 import com.mycompany.basket_price.model.Receipt;
 import com.mycompany.basket_price.model.SpecialOffer;
 import com.mycompany.basket_price.model.SpecialOfferBuy2Get1HalfPrice;
 import com.mycompany.basket_price.model.SpecialOfferDiscount;
+import com.mycompany.basket_price.model.Receipt.ReceiptBuilder;
 
 /**
  * An implementation of Checkout abstract class
@@ -26,9 +29,9 @@ public class PriceBasketCheckout extends Checkout{
 
 	private PriceBasket basketOfItems;
 
-	// TODO: decouple receipt away from this
-	private Receipt receipt;
-	
+	private BigDecimal subTotal;
+	private BigDecimal total;
+	private Map<SpecialOffer, BigDecimal> specialOffersApplied;
 
 	/**
 	 * Constructor
@@ -37,7 +40,6 @@ public class PriceBasketCheckout extends Checkout{
 	 */
 	public PriceBasketCheckout(PriceBasket basket) {
 		basketOfItems = basket;
-		receipt = new Receipt();
 	}
 
 	
@@ -59,7 +61,7 @@ public class PriceBasketCheckout extends Checkout{
 
 		}
 
-		receipt.setSubtotal(new BigDecimal(subtotal));
+		subTotal = new BigDecimal(subtotal);
 
 	}
 
@@ -131,7 +133,7 @@ public class PriceBasketCheckout extends Checkout{
 		}
 		
 		
-		receipt.setSpecialOffersApplied(specialOffersApplied);
+		this.specialOffersApplied = specialOffersApplied;
 	}
 
 	/*
@@ -143,24 +145,28 @@ public class PriceBasketCheckout extends Checkout{
 
 		double totalMoneyOff = 0.0;
 
-		for (Map.Entry<SpecialOffer, BigDecimal> entry : receipt.getSpecialOffersApplied()
+		for (Map.Entry<SpecialOffer, BigDecimal> entry : specialOffersApplied
 				.entrySet()) {
 			totalMoneyOff += entry.getValue().doubleValue();
 		}
 
-		receipt.setTotal(new BigDecimal(receipt.getSubtotal().doubleValue()
-				- totalMoneyOff));
+		total = new BigDecimal(subTotal.doubleValue()
+				- totalMoneyOff);
 
 	}
 
-
-
 	/*
 	 * (non-Javadoc)
-	 * @see com.mycompany.basket_price.logic.Checkout#getReceipt()
+	 * @see com.mycompany.basket_price.logic.Checkout#generateReceipt()
 	 */
 	@Override
-	public Receipt getReceipt() {
-		return receipt;
+	public Receipt generateReceipt() {
+		
+		return new ReceiptBuilder().withItems(new ArrayList<PricedBasketItem>())
+				.withSpecialOffersApplied(specialOffersApplied)
+				.withSubTotal(subTotal)
+				.withTotal(total)
+				.build();
+		
 	}
 }

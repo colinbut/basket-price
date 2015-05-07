@@ -21,6 +21,25 @@ public class Receipt {
 	private BigDecimal total;
 	
 	/**
+	 * Constructor
+	 * 
+	 * @param items
+	 * @param specialOffersApplied
+	 * @param subtotal
+	 * @param total
+	 */
+	public Receipt(List<PricedBasketItem> items,
+			Map<SpecialOffer, BigDecimal> specialOffersApplied,
+			BigDecimal subtotal, BigDecimal total) {
+		super();
+		this.items = items;
+		this.specialOffersApplied = specialOffersApplied;
+		this.subtotal = subtotal;
+		this.total = total;
+	}
+
+
+	/**
 	 * Get the list of items in the basket
 	 * 
 	 * @return the items
@@ -29,14 +48,6 @@ public class Receipt {
 		return items;
 	}
 	
-	/**
-	 * Sets the items basket
-	 * 
-	 * @param items the items to set
-	 */
-	public void setItems(List<PricedBasketItem> items) {
-		this.items = items;
-	}
 	
 	/**
 	 * Get a mappings of special offers with the quantity
@@ -47,12 +58,6 @@ public class Receipt {
 		return specialOffersApplied;
 	}
 	
-	/**
-	 * @param specialOffersApplied the specialOffersApplied to set
-	 */
-	public void setSpecialOffersApplied(Map<SpecialOffer, BigDecimal> specialOffersApplied) {
-		this.specialOffersApplied = specialOffersApplied;
-	}
 	
 	/**
 	 * Gets the subtotal (before any deductions of special offers) of the
@@ -65,13 +70,6 @@ public class Receipt {
 	}
 	
 	/**
-	 * @param subtotal the subtotal to set
-	 */
-	public void setSubtotal(BigDecimal subtotal) {
-		this.subtotal = subtotal;
-	}
-	
-	/**
 	 * Gets the total of all the goods (after deduction of special offers)
 	 * 
 	 * @return the total
@@ -81,10 +79,51 @@ public class Receipt {
 	}
 	
 	/**
-	 * @param total the total to set
+	 * The Builder design pattern
+	 * 
+	 * @author colin
+	 *
 	 */
-	public void setTotal(BigDecimal total) {
-		this.total = total;
+	public static class ReceiptBuilder {
+		
+		private List<PricedBasketItem> items;
+		private Map<SpecialOffer, BigDecimal> specialOffersApplied;
+		private BigDecimal subtotal;
+		private BigDecimal total;
+		
+		public ReceiptBuilder withItems(final List<PricedBasketItem> items){
+			this.items = items;
+			return this;
+		}
+		
+		public ReceiptBuilder withSpecialOffersApplied(Map<SpecialOffer, BigDecimal> specialOffers){
+			this.specialOffersApplied = specialOffers;
+			return this;
+		}
+		
+		
+		public ReceiptBuilder withSubTotal(BigDecimal subTotal){
+			this.subtotal = subTotal;
+			return this;
+		}
+		
+		public ReceiptBuilder withTotal(BigDecimal total){
+			this.total = total;
+			return this;
+		}
+		
+		public Receipt build(){
+			if(items == null || specialOffersApplied == null 
+					|| subtotal == null || total == null) {
+				throw new IllegalArgumentException("Unable to construct Receipt - not all +"
+						+ "properties set");
+			}
+			
+			return new Receipt(this.items, this.specialOffersApplied, this.subtotal, this.total);
+		}
+		
+		
+		
 	}
 	
 	

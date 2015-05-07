@@ -21,13 +21,6 @@ import com.mycompany.basket_price.model.Receipt;
  *
  */
 public abstract class Checkout {
-
-	/**
-	 * Gets the receipt after checking out the items of goods
-	 * 
-	 * @return a receipt
-	 */
-	public abstract Receipt getReceipt();
 	
 	/**
 	 * Calculates the subtotal of all the items of goods.
@@ -51,6 +44,13 @@ public abstract class Checkout {
 	 * in the pricing basket
 	 */
 	public abstract void applySpecialOffers();
+	
+	/**
+	 * Gets the receipt after checking out the items of goods
+	 * 
+	 * @return the receipt
+	 */
+	public abstract Receipt generateReceipt();
 	
 	/**
 	 * The "Template Method" design pattern
