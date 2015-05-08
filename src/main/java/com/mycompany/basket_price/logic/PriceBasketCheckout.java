@@ -33,6 +33,7 @@ public class PriceBasketCheckout extends Checkout{
 	private BigDecimal total;
 	private Map<SpecialOffer, BigDecimal> specialOffersApplied;
 
+
 	/**
 	 * Constructor
 	 * 
@@ -40,6 +41,30 @@ public class PriceBasketCheckout extends Checkout{
 	 */
 	public PriceBasketCheckout(PriceBasket basket) {
 		basketOfItems = basket;
+		specialOffersApplied = new HashMap<SpecialOffer, BigDecimal>();
+	}
+	
+	/**
+	 * @return the subTotal
+	 */
+	public BigDecimal getSubTotal() {
+		return subTotal;
+	}
+
+
+	/**
+	 * @return the total
+	 */
+	public BigDecimal getTotal() {
+		return total;
+	}
+
+
+	/**
+	 * @return the specialOffersApplied
+	 */
+	public Map<SpecialOffer, BigDecimal> getSpecialOffersApplied() {
+		return specialOffersApplied;
 	}
 
 	
@@ -65,75 +90,67 @@ public class PriceBasketCheckout extends Checkout{
 
 	}
 
+	private void handleSpecialOfferDiscount(SpecialOffer specialOffer, BasketItem item){
+		SpecialOfferDiscount sod = (SpecialOfferDiscount) specialOffer;
+
+		double discount = sod.getDiscount();
+		double moneyOff = item.getPrice().doubleValue()
+				* (discount / 100);
+
+		specialOffersApplied.put(sod, new BigDecimal(moneyOff));
+	}
+	
+	
+	private void handleSpecialOfferBuy2Get1HalfPrice(SpecialOffer specialOffer, BasketItem item){
+		
+		SpecialOfferBuy2Get1HalfPrice sob2g1hp = (SpecialOfferBuy2Get1HalfPrice) specialOffer;
+		
+		// bought enough items to satisfy special offer
+		if (basketOfItems.getBasketItems().get(item) >= 2) {
+
+			// special offer applied, bought item at half price
+			if (basketOfItems.basketContainItem(sob2g1hp.getHalfPriceItem())) {
+
+				double moneyToTakeOff = sob2g1hp.getHalfPriceItem().getPrice().doubleValue() / 2;
+				specialOffersApplied.put(sob2g1hp,new BigDecimal(moneyToTakeOff));
+
+			} 
+		} 
+		
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see com.mycompany.basket_price.logic.Checkout#applySpecialOffers()
 	 */
 	@Override
 	public void applySpecialOffers() {
+		
 		// get special offers & apply them to items bought
 
 		List<SpecialOffer> specialOffersInStore = PriceBasketApplicationStore
 				.getInstance().getStoreSpecialOffers();
 
-		// TODO: rewrite this later
-		Map<SpecialOffer, BigDecimal> specialOffersApplied = new HashMap<SpecialOffer, BigDecimal>();
-
 		for (BasketItem item : basketOfItems.getBasketItems().keySet()) {
 
 			for (int i = 0; i < specialOffersInStore.size(); i++) {
-				if (specialOffersInStore.get(i).getItemOnSpecialOffer()
-						.getClass().isInstance(item)) {
+				
+				SpecialOffer specialOffer = specialOffersInStore.get(i);
+				
+				if (specialOffer.getItemOnSpecialOffer().getClass().isInstance(item)) {
 
-					// TODO: re-code this using handlers maybe
-
-					if (specialOffersInStore.get(i) instanceof SpecialOfferDiscount) {
-
-						SpecialOfferDiscount sod = (SpecialOfferDiscount) specialOffersInStore
-								.get(i);
-
-						double discount = sod.getDiscount();
-						double moneyOff = item.getPrice().doubleValue()
-								* (discount / 100);
-
-						specialOffersApplied.put(sod, new BigDecimal(moneyOff));
-
-					} else if (specialOffersInStore.get(i) instanceof SpecialOfferBuy2Get1HalfPrice) {
-
-						SpecialOfferBuy2Get1HalfPrice sob2g1hp = (SpecialOfferBuy2Get1HalfPrice) specialOffersInStore
-								.get(i);
-
-						int quantity = basketOfItems.getBasketItems().get(item);
-						if (quantity >= 2) {
-
-							if (basketOfItems.basketContainItem(sob2g1hp
-									.getHalfPriceItem())) {
-
-								double moneyToTakeOff = sob2g1hp
-										.getHalfPriceItem().getPrice()
-										.doubleValue() / 2;
-								specialOffersApplied.put(sob2g1hp,
-										new BigDecimal(moneyToTakeOff));
-
-							} else {
-								// no special offer applied too as has not
-								// bought the
-								// item being offered half price
-							}
-						} else {
-							// no special offer applied as has not bought enough
-							// of the
-							// specialed offered item
-						}
-
+					if (specialOffer instanceof SpecialOfferDiscount) {
+						handleSpecialOfferDiscount(specialOffer, item);
+					} 
+					else if (specialOffer instanceof SpecialOfferBuy2Get1HalfPrice) {
+						handleSpecialOfferBuy2Get1HalfPrice(specialOffer, item);
 					}
+					
 				}
 			}
 
 		}
 		
-		
-		this.specialOffersApplied = specialOffersApplied;
 	}
 
 	/*
