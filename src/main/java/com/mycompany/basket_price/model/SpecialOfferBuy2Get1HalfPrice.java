@@ -3,6 +3,9 @@
  */
 package com.mycompany.basket_price.model;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
 /**
  * An implementation of the SpecialOffer interface to represent a particular 
  * deal of "Buy 2 get 1 half price"
@@ -68,6 +71,38 @@ public class SpecialOfferBuy2Get1HalfPrice implements SpecialOffer{
 	@Override
 	public BasketItem getItemOnSpecialOffer() {
 		return getBuy2Item();
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.mycompany.basket_price.model.SpecialOffer#handleSpecialOffer(java.lang.Object[])
+	 */
+	@Override
+	public Map<SpecialOffer, BigDecimal> handleSpecialOffer(Object... args) {
+		
+		if(args.length != 3){
+			throw new IllegalArgumentException("Incorrect argument values supplied");
+		}
+		
+		@SuppressWarnings("unchecked")
+		Map<SpecialOffer, BigDecimal> specialOffersApplied = (Map<SpecialOffer, BigDecimal>)args[0];
+		PriceBasket basketOfItems = ((PriceBasket)args[1]);
+		int quantity = basketOfItems.getBasketItems().get((BasketItem)args[2]).intValue();
+		
+		
+		// bought enough items to satisfy special offer
+		if (quantity >= 2) {
+
+			// special offer applied, bought item at half price
+			if (basketOfItems.basketContainItem(halfPriceItem)) {
+
+				double moneyToTakeOff = halfPriceItem.getPrice().doubleValue() / 2;
+				specialOffersApplied.put(this,new BigDecimal(moneyToTakeOff));
+
+			} 
+		} 
+		
+		return specialOffersApplied;
 	}
 	
 	

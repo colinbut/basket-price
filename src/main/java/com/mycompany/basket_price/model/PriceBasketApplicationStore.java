@@ -41,6 +41,7 @@ public class PriceBasketApplicationStore {
 	private void configureSpecialOffersInStoreIntoSystem(){
 		
 		//TODO: use a better way to associate items with SpecialOffers
+		// put in xml config file & use reflection to setup special offers classes
 		
 		specialOffersInStore.add(new SpecialOfferDiscount(10.0, 
 				storeFactory.getBasketItem("Apples")));

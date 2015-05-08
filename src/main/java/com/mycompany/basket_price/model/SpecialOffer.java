@@ -3,6 +3,9 @@
  */
 package com.mycompany.basket_price.model;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
 /**
  * An interface for representing the Special Offer
  * 
@@ -10,9 +13,6 @@ package com.mycompany.basket_price.model;
  *
  */
 public interface SpecialOffer {
-
-	//TODO: change this SpecialOffer model to be more flexible in future
-	// for now it is ok
 	
 	/**
 	 * Gets the special offer item
@@ -20,4 +20,13 @@ public interface SpecialOffer {
 	 * @return an item that is part of a special offering
 	 */
 	BasketItem getItemOnSpecialOffer();
+	
+	/**
+	 * Callback method for SpecialOffer to handle what/how to do the special
+	 * offer processing
+	 * 
+	 * @param args varargs
+	 * @return map of special offers
+	 */
+	Map<SpecialOffer, BigDecimal> handleSpecialOffer(Object...args);
 }

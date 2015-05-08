@@ -90,34 +90,7 @@ public class PriceBasketCheckout extends Checkout{
 
 	}
 
-	private void handleSpecialOfferDiscount(SpecialOffer specialOffer, BasketItem item){
-		SpecialOfferDiscount sod = (SpecialOfferDiscount) specialOffer;
 
-		double discount = sod.getDiscount();
-		double moneyOff = item.getPrice().doubleValue()
-				* (discount / 100);
-
-		specialOffersApplied.put(sod, new BigDecimal(moneyOff));
-	}
-	
-	
-	private void handleSpecialOfferBuy2Get1HalfPrice(SpecialOffer specialOffer, BasketItem item){
-		
-		SpecialOfferBuy2Get1HalfPrice sob2g1hp = (SpecialOfferBuy2Get1HalfPrice) specialOffer;
-		
-		// bought enough items to satisfy special offer
-		if (basketOfItems.getBasketItems().get(item) >= 2) {
-
-			// special offer applied, bought item at half price
-			if (basketOfItems.basketContainItem(sob2g1hp.getHalfPriceItem())) {
-
-				double moneyToTakeOff = sob2g1hp.getHalfPriceItem().getPrice().doubleValue() / 2;
-				specialOffersApplied.put(sob2g1hp,new BigDecimal(moneyToTakeOff));
-
-			} 
-		} 
-		
-	}
 	
 	/*
 	 * (non-Javadoc)
@@ -140,10 +113,10 @@ public class PriceBasketCheckout extends Checkout{
 				if (specialOffer.getItemOnSpecialOffer().getClass().isInstance(item)) {
 
 					if (specialOffer instanceof SpecialOfferDiscount) {
-						handleSpecialOfferDiscount(specialOffer, item);
+						specialOffer.handleSpecialOffer(specialOffersApplied);
 					} 
 					else if (specialOffer instanceof SpecialOfferBuy2Get1HalfPrice) {
-						handleSpecialOfferBuy2Get1HalfPrice(specialOffer, item);
+						specialOffer.handleSpecialOffer(specialOffersApplied, basketOfItems, item);
 					}
 					
 				}

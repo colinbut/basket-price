@@ -57,8 +57,8 @@ public class PriceBasket {
 	/**
 	 * Checks whether the basket contains a particular item
 	 * 
-	 * @param item
-	 * @return
+	 * @param item the item to search for
+	 * @return true if it does false otherwise
 	 */
 	public boolean basketContainItem(BasketItem item){
 		

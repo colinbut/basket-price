@@ -3,6 +3,9 @@
  */
 package com.mycompany.basket_price.model;
 
+import java.math.BigDecimal;
+import java.util.Map;
+
 /**
  * An implementation of the SpecialOffer interface where it represents a 
  * deal of a "discount"ed offer
@@ -69,6 +72,29 @@ public class SpecialOfferDiscount implements SpecialOffer {
 	@Override
 	public BasketItem getItemOnSpecialOffer() {
 		return getItem();
+	}
+
+
+	/*
+	 * (non-Javadoc)
+	 * @see com.mycompany.basket_price.model.SpecialOffer#handleSpecialOffer(java.util.Map)
+	 */
+	@Override
+	public Map<SpecialOffer, BigDecimal> handleSpecialOffer(Object...args) {
+		
+		if(args.length != 1){
+			throw new IllegalArgumentException("Incorrect argument values supplied");
+		}
+		
+		@SuppressWarnings("unchecked")
+		Map<SpecialOffer, BigDecimal> specialOffersApplied = (Map<SpecialOffer, BigDecimal>)args[0];
+		
+		double discount = this.getDiscount();
+		double moneyOff = item.getPrice().doubleValue() * (discount / 100);
+		
+		specialOffersApplied.put(this, new BigDecimal(moneyOff));
+		return specialOffersApplied;
+		
 	}
 	
 	
