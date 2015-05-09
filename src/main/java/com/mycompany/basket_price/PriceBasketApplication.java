@@ -3,6 +3,7 @@
  */
 package com.mycompany.basket_price;
 
+import com.mycompany.basket_price.exception.UnknownItemException;
 import com.mycompany.basket_price.logic.PriceBasketCheckout;
 import com.mycompany.basket_price.model.PriceBasket;
 import com.mycompany.basket_price.service.PriceBasketService;
@@ -18,15 +19,22 @@ import com.mycompany.basket_price.util.PriceBasketApplicationInputReader;
 public class PriceBasketApplication {
 
 	public String process(String[] args){
+		
 		PriceBasketService priceBasketService = new PriceBasketServiceImpl();
 		
-		PriceBasket basket = PriceBasketApplicationInputReader.readInputFromCommandLine(args);
-		
-		// using Constructor DI
-		PriceBasketCheckout checkout = new PriceBasketCheckout(basket);
-		
-		// using Setter DI
-		((PriceBasketServiceImpl)priceBasketService).setPriceBasketCheckout(checkout);
+		try{
+			PriceBasket basket = PriceBasketApplicationInputReader.readInputFromCommandLine(args);
+			
+			// using Constructor DI
+			PriceBasketCheckout checkout = new PriceBasketCheckout(basket);
+			
+			// using Setter DI
+			((PriceBasketServiceImpl)priceBasketService).setPriceBasketCheckout(checkout);
+			
+		}
+		catch(UnknownItemException e){
+			System.err.println("Unknown Item in store");
+		}
 		
 		return priceBasketService.getPriceOfBasketItems();
 	}
