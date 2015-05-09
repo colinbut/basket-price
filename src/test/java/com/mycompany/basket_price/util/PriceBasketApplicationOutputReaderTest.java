@@ -40,7 +40,7 @@ public class PriceBasketApplicationOutputReaderTest {
 								.append("Apples 10% off: -10p")
 								.append("Total: £3.00").toString();
 		
-		//String actual = PriceBasketApplicationOutputWriter.writeOutput();
+		//String actual = PriceBasketApplicationOutputWriter.writeOutput(receipt)
 		
 		//assertEquals(expected, actual);
 		

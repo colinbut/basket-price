@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import com.mycompany.basket_price.exception.UnknownItemException;
 import com.mycompany.basket_price.model.PriceBasket;
 import com.mycompany.basket_price.model.goods.Apples;
 import com.mycompany.basket_price.model.goods.Bread;
@@ -19,6 +20,9 @@ import com.mycompany.basket_price.util.PriceBasketApplicationInputReader;
  */
 public class PriceBasketApplicationInputReaderTest {
 
+	/**
+	 * Test the reading of input data from the command line
+	 */
 	@Test
 	public void testReadInputFromCommandLine() {
 		
@@ -36,10 +40,22 @@ public class PriceBasketApplicationInputReaderTest {
 				PriceBasketApplicationInputReader.readInputFromCommandLine(input);
 		
 		// Verify
-		assertTrue(expectedBasket.getBasketItems().size() == 
-				actualBasket.getBasketItems().size());
+		assertTrue(expectedBasket.getBasketItems().size() == actualBasket.getBasketItems().size());
 
 		
+	}
+	
+	/**
+	 * Test the failure to retreive a basket because of an unknown item
+	 */
+	@Test(expected = UnknownItemException.class)
+	public void testReadInputFromCommandLineThrowingUnknownItemException(){
+		
+		// Test Data
+		String[] input = {"ShoppingBasket", "Ginger", "Milk", "Bread"};
+			
+		// this line should throw UnknownItemException
+		PriceBasketApplicationInputReader.readInputFromCommandLine(input);
 		
 	}
 
