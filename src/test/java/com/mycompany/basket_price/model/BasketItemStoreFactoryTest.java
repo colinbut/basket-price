@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycompany.basket_price;
+package com.mycompany.basket_price.model;
 
 import static org.junit.Assert.*;
 
@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author colin
  *
  */
-public class PriceBasketTest {
+public class BasketItemStoreFactoryTest {
 
 	/**
 	 * @throws java.lang.Exception

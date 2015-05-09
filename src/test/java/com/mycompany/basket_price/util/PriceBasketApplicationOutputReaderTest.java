@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mycompany.basket_price;
+package com.mycompany.basket_price.util;
 
 import static org.junit.Assert.*;
 
