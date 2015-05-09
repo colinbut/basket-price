@@ -29,11 +29,10 @@ public class PriceBasketCheckout extends Checkout{
 
 	private PriceBasket basketOfItems;
 
-	private BigDecimal subTotal;
-	private BigDecimal total;
+	private BigDecimal subTotal = new BigDecimal(0.0);
+	private BigDecimal total = new BigDecimal(0.0);
 	private Map<SpecialOffer, BigDecimal> specialOffersApplied;
-
-
+	
 	/**
 	 * Constructor
 	 * 
@@ -67,6 +66,27 @@ public class PriceBasketCheckout extends Checkout{
 		return specialOffersApplied;
 	}
 
+	/**
+	 * @param subTotal the subTotal to set
+	 */
+	public void setSubTotal(BigDecimal subTotal) {
+		this.subTotal = subTotal;
+	}
+
+	/**
+	 * @param total the total to set
+	 */
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	/**
+	 * @param specialOffersApplied the specialOffersApplied to set
+	 */
+	public void setSpecialOffersApplied(
+			Map<SpecialOffer, BigDecimal> specialOffersApplied) {
+		this.specialOffersApplied = specialOffersApplied;
+	}
 	
 	/*
 	 * (non-Javadoc)
@@ -139,9 +159,8 @@ public class PriceBasketCheckout extends Checkout{
 				.entrySet()) {
 			totalMoneyOff += entry.getValue().doubleValue();
 		}
-
-		total = new BigDecimal(subTotal.doubleValue()
-				- totalMoneyOff);
+		
+		total = new BigDecimal(subTotal.doubleValue() - totalMoneyOff);
 
 	}
 

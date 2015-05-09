@@ -3,6 +3,7 @@
  */
 package com.mycompany.basket_price.model;
 
+import com.mycompany.basket_price.exception.UnknownItemException;
 import com.mycompany.basket_price.model.goods.Apples;
 import com.mycompany.basket_price.model.goods.Bread;
 import com.mycompany.basket_price.model.goods.Milk;
@@ -29,7 +30,10 @@ public class BasketItemStoreFactory {
 	 * @param itemName
 	 * @return
 	 */
-	public BasketItem getBasketItem(String itemName){
+	public BasketItem getBasketItem(String itemName) throws UnknownItemException{
+		
+		// maybe replace this with reflection -
+		// troll xml file and parse items to build
 		
 		BasketItem item;
 		
@@ -47,7 +51,7 @@ public class BasketItemStoreFactory {
 				item = new Milk(); 
 				break;
 			default: 
-				throw new IllegalArgumentException("");
+				throw new UnknownItemException("Invalid item name supplied");
 		}
 		
 		return item;
