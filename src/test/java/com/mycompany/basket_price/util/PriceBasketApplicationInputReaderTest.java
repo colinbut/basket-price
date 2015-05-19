@@ -46,7 +46,7 @@ public class PriceBasketApplicationInputReaderTest {
 	}
 	
 	/**
-	 * Test the failure to retreive a basket because of an unknown item
+	 * Test the failure to retrieve a basket because of an unknown item
 	 */
 	@Test(expected = UnknownItemException.class)
 	public void testReadInputFromCommandLineThrowingUnknownItemException(){

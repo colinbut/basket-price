@@ -13,6 +13,8 @@ import org.junit.Test;
 import com.mycompany.basket_price.util.PriceBasketApplicationOutputWriter;
 
 /**
+ * PriceBasketApplicationOutputReaderTest class
+ * 
  * @author colin
  *
  */

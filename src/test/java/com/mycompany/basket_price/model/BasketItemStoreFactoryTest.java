@@ -15,6 +15,8 @@ import com.mycompany.basket_price.model.goods.Milk;
 import com.mycompany.basket_price.model.goods.Soup;
 
 /**
+ * BasketItemStoreFactoryTest class
+ * 
  * @author colin
  *
  */

@@ -18,6 +18,8 @@ import com.mycompany.basket_price.model.goods.Milk;
 import com.mycompany.basket_price.model.goods.Soup;
 
 /**
+ * SpecialOfferBuy2Get1HalfPriceTest class
+ * 
  * @author colin
  *
  */
@@ -30,6 +32,9 @@ public class SpecialOfferBuy2Get1HalfPriceTest {
 		specialOffer = new SpecialOfferBuy2Get1HalfPrice(new Bread(), new Soup());
 	}
 	
+	/**
+	 * Test handling of special offer
+	 */
 	@Test
 	public void testHandleSpecialOffer(){
 		

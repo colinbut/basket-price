@@ -31,6 +31,8 @@ import com.mycompany.basket_price.model.goods.Milk;
 import com.mycompany.basket_price.model.goods.Soup;
 
 /**
+ * PriceBasketCheckoutTest class
+ * 
  * @author colin
  *
  */
@@ -122,7 +124,7 @@ public class PriceBasketCheckoutTest {
 	@Ignore
 	@Test
 	public void testApplySpecialOffers(){
-		fail("Not Yet Implemented");
+		fail("Not Yet Implemented"); //TODO:
 	}
 	
 }

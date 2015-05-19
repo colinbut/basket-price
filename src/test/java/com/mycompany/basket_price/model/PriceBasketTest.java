@@ -12,6 +12,8 @@ import com.mycompany.basket_price.model.goods.Apples;
 import com.mycompany.basket_price.model.goods.Bread;
 
 /**
+ * PriceBasketTest class
+ * 
  * @author colin
  *
  */
@@ -24,6 +26,9 @@ public class PriceBasketTest {
 		priceBasket = new PriceBasket();
 	}
 	
+	/**
+	 * Test putting the item in the basket
+	 */
 	@Test
 	public void testPutItemInBasket() {
 		
@@ -36,6 +41,9 @@ public class PriceBasketTest {
 		
 	}
 	
+	/**
+	 * Test whether the basket contains an item
+	 */
 	@Test
 	public void testBasketContainItem(){
 		

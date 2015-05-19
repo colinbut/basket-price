@@ -21,6 +21,8 @@ import com.mycompany.basket_price.model.goods.Milk;
 import com.mycompany.basket_price.model.goods.Soup;
 
 /**
+ * ReceiptTest class
+ * 
  * @author colin
  *
  */
@@ -33,7 +35,10 @@ public class ReceiptTest {
 		receiptBuilder = new ReceiptBuilder();
 	}
 	
-	
+	/**
+	 * Test the receipt builder not building the receipt 
+	 * object when it is not supplied with correct/enough data
+	 */
 	@Test(expected=IllegalArgumentException.class)
 	public void testReceiptBuilderBuildNotProperly(){
 		receiptBuilder.build();		

@@ -15,6 +15,8 @@ import org.junit.Test;
 import com.mycompany.basket_price.model.goods.Apples;
 
 /**
+ * SpecialOfferDiscountTest class
+ * 
  * @author colin
  *
  */
@@ -27,6 +29,9 @@ public class SpecialOfferDiscountTest {
 		specialOfferDiscount = new SpecialOfferDiscount(50, new Apples());
 	}
 	
+	/**
+	 * Test the handling of special offer discount
+	 */
 	@Test
 	public void testHandleSpecialOfferDiscount(){
 		
