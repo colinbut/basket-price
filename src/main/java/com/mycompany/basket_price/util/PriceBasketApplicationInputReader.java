@@ -8,9 +8,7 @@ import com.mycompany.basket_price.model.PriceBasketApplicationStore;
 
 
 /**
- * A class that is responsible for capturing user entered input
- * 
- * This is aimed to be a utility class
+ * A utility class that is responsible for capturing user entered input
  * 
  * @author colin
  *
@@ -38,6 +36,7 @@ public class PriceBasketApplicationInputReader {
 		
 		/* atm this is only for info purposes - will think of way to use this
 		 * later on */
+		// TODO:
 		String applicationName = args[0]; // this is ignored
 		
 		for(int i = 1; i < args.length; i++){

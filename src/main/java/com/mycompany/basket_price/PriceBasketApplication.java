@@ -18,6 +18,12 @@ import com.mycompany.basket_price.util.PriceBasketApplicationInputReader;
  */
 public class PriceBasketApplication {
 
+	/**
+	 * Processes the items and returns the pricing
+	 * 
+	 * @param args
+	 * @return
+	 */
 	public String process(String[] args){
 		
 		PriceBasketService priceBasketService = new PriceBasketServiceImpl();

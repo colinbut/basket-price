@@ -44,6 +44,8 @@ public class PriceBasketCheckout extends Checkout{
 	}
 	
 	/**
+	 * Gets the subtotal
+	 * 
 	 * @return the subTotal
 	 */
 	public BigDecimal getSubTotal() {
@@ -52,6 +54,8 @@ public class PriceBasketCheckout extends Checkout{
 
 
 	/**
+	 * Gets the total
+	 * 
 	 * @return the total
 	 */
 	public BigDecimal getTotal() {
@@ -60,6 +64,8 @@ public class PriceBasketCheckout extends Checkout{
 
 
 	/**
+	 * Gets the special offers applied
+	 * 
 	 * @return the specialOffersApplied
 	 */
 	public Map<SpecialOffer, BigDecimal> getSpecialOffersApplied() {
@@ -67,6 +73,8 @@ public class PriceBasketCheckout extends Checkout{
 	}
 
 	/**
+	 * Sets the subtotal
+	 * 
 	 * @param subTotal the subTotal to set
 	 */
 	public void setSubTotal(BigDecimal subTotal) {
@@ -74,6 +82,8 @@ public class PriceBasketCheckout extends Checkout{
 	}
 
 	/**
+	 * Sets the total
+	 * 
 	 * @param total the total to set
 	 */
 	public void setTotal(BigDecimal total) {
@@ -81,6 +91,8 @@ public class PriceBasketCheckout extends Checkout{
 	}
 
 	/**
+	 * Sets the special offers applied
+	 * 
 	 * @param specialOffersApplied the specialOffersApplied to set
 	 */
 	public void setSpecialOffersApplied(

@@ -91,27 +91,55 @@ public class Receipt {
 		private BigDecimal subtotal;
 		private BigDecimal total;
 		
+		/**
+		 * Adds items
+		 * 
+		 * @param items
+		 * @return ReceiptBuilder
+		 */
 		public ReceiptBuilder withItems(final List<PricedBasketItem> items){
 			this.items = items;
 			return this;
 		}
 		
+		/**
+		 * Adds special offers
+		 * 
+		 * @param specialOffers
+		 * @return ReceiptBuilder
+		 */
 		public ReceiptBuilder withSpecialOffersApplied(Map<SpecialOffer, BigDecimal> specialOffers){
 			this.specialOffersApplied = specialOffers;
 			return this;
 		}
 		
-		
+		/**
+		 * Adds subtotal
+		 * 
+		 * @param subTotal
+		 * @return ReceiptBuilder
+		 */
 		public ReceiptBuilder withSubTotal(BigDecimal subTotal){
 			this.subtotal = subTotal;
 			return this;
 		}
 		
+		/**
+		 * Adds total
+		 * 
+		 * @param total
+		 * @return ReceiptBuilder
+		 */
 		public ReceiptBuilder withTotal(BigDecimal total){
 			this.total = total;
 			return this;
 		}
 		
+		/**
+		 * Builds the object
+		 * 
+		 * @return Receipt 
+		 */
 		public Receipt build(){
 			if(items == null || specialOffersApplied == null 
 					|| subtotal == null || total == null) {
@@ -122,10 +150,6 @@ public class Receipt {
 			return new Receipt(this.items, this.specialOffersApplied, this.subtotal, this.total);
 		}
 		
-		
-		
 	}
-	
-	
 	
 }
