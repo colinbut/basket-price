@@ -1,5 +1,7 @@
 ## Price Basket
 
+Console application
+
 A small application/program that prices a basket of goods taking into account some special
 offers.
 
@@ -14,15 +16,15 @@ Application Name Item Item Item etc...
 * Git
 * Travis-CI
 * JUnit 4.11
+* Mockito
 
 ###### Technical Design
 - Adopts SOA
 - Design Patterns:
 	- Template Method
-	- Factory Method Pattern (Simple Factory)
+	- Factory Pattern (Simple Factory)
 	- Singleton
 	- Builder
-	- Facade (sort of)
 
 
 
