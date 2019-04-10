@@ -12,6 +12,9 @@
 */target/* 
 .settings/*
 */bin/*
+*.idea/*
+
+*.iml
 
 
 # Packages #
