@@ -5,7 +5,7 @@
  */
 package com.mycompany.basket_price.model
 
-class PriceBasketK() {
+class PriceBasketK {
 
     private var basketItems : MutableMap<BasketItemK, Int>? = null
 
