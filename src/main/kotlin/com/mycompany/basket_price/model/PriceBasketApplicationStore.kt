@@ -16,7 +16,12 @@ object PriceBasketApplicationStoreK {
     }
 
     private fun configureSpecialOffersInStoreIntoSystem() {
+        specialOffersInStore.add(SpecialOfferDiscountK(10.0, storeFactoryK.getBasketItem(ItemType.APPLE)))
+        specialOffersInStore.add(SpecialOfferBuy2Get1HalfPriceK(storeFactoryK.getBasketItem(ItemType.SOUP), storeFactoryK.getBasketItem(ItemType.BREAD)))
+    }
 
+    fun getStoreSpecialOffers() : MutableList<SpecialOfferK> {
+        return specialOffersInStore
     }
 
 }
