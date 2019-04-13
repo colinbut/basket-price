@@ -24,4 +24,8 @@ object PriceBasketApplicationStoreK {
         return specialOffersInStore
     }
 
+    fun storeFactory() : BasketItemStoreFactoryK {
+        return storeFactoryK
+    }
+
 }
