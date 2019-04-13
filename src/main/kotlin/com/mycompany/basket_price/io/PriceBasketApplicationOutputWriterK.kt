@@ -26,15 +26,16 @@ object PriceBasketApplicationOutputWriterK {
         } else {
             for (entry in receipt.specialOffersApplied) {
                 if (entry.key is SpecialOfferDiscountK) {
-                    specialOfferSb.append(entry.key.getItemOnSpecialOffer().getItemName())
-                    specialOfferSb.append(" " + entry.key.discount + "%s off: ")
+                    val specialOfferDiscount : SpecialOfferDiscountK = entry.key as SpecialOfferDiscountK
+                    specialOfferSb.append(specialOfferDiscount.getItemOnSpecialOffer().getItemName())
+                    specialOfferSb.append(" " + specialOfferDiscount.discount + "%s off: ")
                     specialOfferSb.append("-" + if (entry.value.toDouble() > 1.00) {
                         "£${entry.value.setScale(2, RoundingMode.HALF_EVEN)}"
                     } else {
                         entry.value.setScale(2, RoundingMode.HALF_EVEN)
                     })
                 } else if (entry.key is SpecialOfferBuy2Get1HalfPriceK) {
-                    val sob2g1hp : SpecialOfferBuy2Get1HalfPriceK = entry.key
+                    val sob2g1hp : SpecialOfferBuy2Get1HalfPriceK = entry.key as SpecialOfferBuy2Get1HalfPriceK
                     specialOfferSb.append("Buy 2 ${sob2g1hp.getItemOnSpecialOffer().getItemName()}")
                     specialOfferSb.append(" get ${sob2g1hp.halfPriceItem.getItemName()}")
                     specialOfferSb.append("-" + if (entry.value.toDouble() > 1.00) {

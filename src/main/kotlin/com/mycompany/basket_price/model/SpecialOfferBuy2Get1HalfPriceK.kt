@@ -8,8 +8,8 @@ package com.mycompany.basket_price.model
 import java.lang.IllegalArgumentException
 import java.math.BigDecimal
 
-data class SpecialOfferBuy2Get1HalfPriceK(private val halfPriceItem: BasketItemK,
-                                     private val buy2Item: BasketItemK) : SpecialOfferK {
+data class SpecialOfferBuy2Get1HalfPriceK(val halfPriceItem: BasketItemK,
+                                            private val buy2Item: BasketItemK) : SpecialOfferK {
 
 
     override fun handleSpecialOffer(vararg varargs: Any): Map<SpecialOfferK, BigDecimal> {

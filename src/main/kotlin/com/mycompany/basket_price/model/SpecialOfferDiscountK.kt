@@ -8,7 +8,7 @@ package com.mycompany.basket_price.model
 import java.lang.IllegalArgumentException
 import java.math.BigDecimal
 
-data class SpecialOfferDiscountK(private var discount: Double,
+data class SpecialOfferDiscountK(var discount: Double,
                                  private var item: BasketItemK) : SpecialOfferK {
 
     override fun getItemOnSpecialOffer(): BasketItemK {
