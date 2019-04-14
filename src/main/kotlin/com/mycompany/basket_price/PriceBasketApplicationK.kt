@@ -5,7 +5,9 @@
  */
 package com.mycompany.basket_price
 
+import com.mycompany.basket_price.exception.UnknownItemExceptionK
 import com.mycompany.basket_price.io.PriceBasketApplicationInputReaderK
+import com.mycompany.basket_price.logic.PriceBasketCheckoutK
 import com.mycompany.basket_price.service.PriceBasketServiceImplK
 
 class PriceBasketApplicationK {
@@ -16,7 +18,7 @@ class PriceBasketApplicationK {
             val checkout = PriceBasketCheckoutK(basket)
             val priceBasketService = PriceBasketServiceImplK(checkout)
             return priceBasketService.getPriceOfBasketItems()
-        } catch (ex : UnknownItemException) {
+        } catch (ex : UnknownItemExceptionK) {
             println("Unknown Item in store")
             throw RuntimeException()
         }

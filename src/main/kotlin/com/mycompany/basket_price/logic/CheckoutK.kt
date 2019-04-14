@@ -3,7 +3,7 @@
  * | Copyright © 2019 Colin But. All rights reserved.
  * |-------------------------------------------------
  */
-package com.mycompany.basket_price
+package com.mycompany.basket_price.logic
 
 import com.mycompany.basket_price.model.ReceiptK
 

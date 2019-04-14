@@ -3,7 +3,7 @@
  * | Copyright © 2019 Colin But. All rights reserved.
  * |-------------------------------------------------
  */
-package com.mycompany.basket_price
+package com.mycompany.basket_price.logic
 
 import com.mycompany.basket_price.model.*
 import java.math.BigDecimal
@@ -27,7 +27,7 @@ class PriceBasketCheckoutK(basketK: PriceBasketK) : CheckoutK() {
         val items = basketOfItems.getBasketItems()
         var subtotal = 0.0
         for (entry in items.entries){
-            subtotal += entry.key.getItemPrice().toDouble() * entry.value
+            subtotal += entry.key.price.toDouble() * entry.value
         }
         subTotal = BigDecimal.valueOf(subtotal)
     }

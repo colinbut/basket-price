@@ -54,7 +54,7 @@ public class PriceBasketApplicationInputReaderTest {
 		// Test Data
 		String[] input = {"ShoppingBasket", "Ginger", "Milk", "Bread"};
 			
-		// this line should throw UnknownItemException
+		// this line should throw UnknownItemExceptionK
 		PriceBasketApplicationInputReader.readInputFromCommandLine(input);
 		
 	}

@@ -5,7 +5,7 @@
  */
 package com.mycompany.basket_price.service
 
-import com.mycompany.basket_price.PriceBasketCheckoutK
+import com.mycompany.basket_price.logic.PriceBasketCheckoutK
 import com.mycompany.basket_price.io.PriceBasketApplicationOutputWriterK
 import com.mycompany.basket_price.model.ReceiptK
 

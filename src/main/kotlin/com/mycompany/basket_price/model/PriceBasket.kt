@@ -7,15 +7,15 @@ package com.mycompany.basket_price.model
 
 class PriceBasketK {
 
-    private var basketItems : MutableMap<BasketItemK, Int>? = null
+    private var basketItems : MutableMap<PriceBasketItemK, Int>? = null
 
     init {
         basketItems = HashMap()
     }
 
-    fun putItemInBasket(newItemK: BasketItemK) {
+    fun putItemInBasket(newItemK: PriceBasketItemK) {
         for (item in basketItems!!.keys) {
-            if (item.getItemName() == newItemK.getItemName()) {
+            if (item.name == newItemK.name) {
                 basketItems!![item] = basketItems!!.get(item)!!.toInt() + 1
                 return
             }
@@ -23,11 +23,11 @@ class PriceBasketK {
         basketItems!![newItemK] = 1
     }
 
-    fun getBasketItems() : Map<BasketItemK, Int> {
+    fun getBasketItems() : Map<PriceBasketItemK, Int> {
         return basketItems!!
     }
 
-    fun basketContainItem(item: BasketItemK) : Boolean {
-        return basketItems!!.filterKeys { it.getItemName() == item.getItemName() }.isNotEmpty()
+    fun basketContainItem(item: PriceBasketItemK) : Boolean {
+        return basketItems!!.filterKeys { it.name == item.name }.isNotEmpty()
     }
 }

@@ -9,9 +9,9 @@ import java.lang.IllegalArgumentException
 import java.math.BigDecimal
 
 data class SpecialOfferDiscountK(var discount: Double,
-                                 private var item: BasketItemK) : SpecialOfferK {
+                                 private var item: PriceBasketItemK) : SpecialOfferK {
 
-    override fun getItemOnSpecialOffer(): BasketItemK {
+    override fun getItemOnSpecialOffer(): PriceBasketItemK {
         return item
     }
 
@@ -23,7 +23,7 @@ data class SpecialOfferDiscountK(var discount: Double,
         val specialOffersApplied : MutableMap<SpecialOfferK, BigDecimal> = varargs[0] as MutableMap<SpecialOfferK, BigDecimal>
 
         val discount = this.discount
-        val moneyOff = item.getItemPrice().toDouble() * (discount / 100)
+        val moneyOff = item.price.toDouble() * (discount / 100)
 
         specialOffersApplied.put(this, BigDecimal.valueOf(moneyOff))
         return specialOffersApplied
