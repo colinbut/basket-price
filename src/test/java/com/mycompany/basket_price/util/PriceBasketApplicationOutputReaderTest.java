@@ -1,10 +1,13 @@
-/**
- * 
+/*
+ * |-------------------------------------------------
+ * | Copyright © 2015 Colin But. All rights reserved.
+ * |-------------------------------------------------
  */
 package com.mycompany.basket_price.util;
 
 import static org.junit.Assert.*;
 
+import com.mycompany.basket_price.model.Receipt;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
@@ -42,9 +45,9 @@ public class PriceBasketApplicationOutputReaderTest {
 								.append("Apples 10% off: -10p")
 								.append("Total: £3.00").toString();
 		
-		//String actual = PriceBasketApplicationOutputWriter.writeOutput(receipt)
-		
-		//assertEquals(expected, actual);
+//		String actual = PriceBasketApplicationOutputWriter.writeOutput(receipt);
+//
+//		assertEquals(expected, actual);
 		
 	}
 
