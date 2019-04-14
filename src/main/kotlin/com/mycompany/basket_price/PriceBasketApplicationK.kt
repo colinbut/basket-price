@@ -12,7 +12,7 @@ import com.mycompany.basket_price.service.PriceBasketServiceImplK
 
 class PriceBasketApplicationK {
 
-    private fun process(args: Array<String>) : String {
+    fun process(args: Array<String>) : String {
         try {
             val basket = PriceBasketApplicationInputReaderK.readInputFromCommandLine(args)
             val checkout = PriceBasketCheckoutK(basket)
@@ -24,7 +24,8 @@ class PriceBasketApplicationK {
         }
     }
 
-    fun main(args: Array<String>){
-        println(PriceBasketApplicationK().process(args))
-    }
+}
+
+fun main(args: Array<String>){
+    println(PriceBasketApplicationK().process(args))
 }
