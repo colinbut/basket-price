@@ -11,7 +11,7 @@ import java.math.BigDecimal
 class PriceBasketCheckoutK(basketK: PriceBasketK) : CheckoutK() {
 
     private val basketOfItems : PriceBasketK = basketK
-    private var subTotal : BigDecimal = BigDecimal.ZERO
+    var subTotal : BigDecimal = BigDecimal.ZERO
     private var total : BigDecimal = BigDecimal.ZERO
     private var specialOffersApplied : MutableMap<SpecialOfferK, BigDecimal> = HashMap()
 
