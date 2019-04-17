@@ -3,12 +3,8 @@
  * | Copyright © 2019 Colin But. All rights reserved.
  * |-------------------------------------------------
  */
-package com.mycompany.basket_price.logic.model
+package com.mycompany.basket_price.model
 
-import com.mycompany.basket_price.model.PriceBasketItemK
-import com.mycompany.basket_price.model.PriceBasketK
-import com.mycompany.basket_price.model.SpecialOfferBuy2Get1HalfPriceK
-import com.mycompany.basket_price.model.SpecialOfferK
 import java.math.BigDecimal
 import kotlin.test.Test
 import kotlin.test.assertEquals
