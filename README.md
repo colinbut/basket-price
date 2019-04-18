@@ -1,4 +1,4 @@
-## Price Basket
+## Checkout
 
 ![Checkout Image](etc/checkout.jpg)
 
