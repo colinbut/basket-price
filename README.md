@@ -1,5 +1,7 @@
 ## Price Basket
 
+![Checkout Image](etc/checkout.jpg)
+
 Console application
 
 A small application/program that prices a basket of goods taking into account some special
@@ -12,6 +14,7 @@ Application Name Item Item Item etc...
 
 ###### Technologies
 * Java 8
+* Kotlin
 * Maven
 * Git
 * Travis-CI
@@ -19,12 +22,12 @@ Application Name Item Item Item etc...
 * Mockito
 
 ###### Technical Design
-- Adopts SOA
+- ~Adopts SOA~
 - Design Patterns:
 	- Template Method
-	- Factory Pattern (Simple Factory)
+	- Factory Pattern (Simple Factory) [Java version only]
 	- Singleton
-	- Builder
+	- Builder [Java version only]
 
 
 
